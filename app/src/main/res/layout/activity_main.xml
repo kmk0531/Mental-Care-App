@@ -1,19 +1,151 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/main"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    android:orientation="vertical"
+    android:padding="16dp">
 
-    <TextView
-        android:layout_width="wrap_content"
+    <!-- 월 변경 버튼 & 현재 월 표시 -->
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Hello World!"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:orientation="horizontal"
+        android:gravity="center">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <Button
+            android:id="@+id/btn_prev"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="⬅" />
+
+        <TextView
+            android:id="@+id/text_month"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="24dp"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:text="March 2025" />
+
+        <Button
+            android:id="@+id/btn_next"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="⮕" />
+    </LinearLayout>
+    <!-- 요일 헤더 (영문) -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="16dp"
+        android:gravity="center">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="Sun"
+            android:textColor="#F44336"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            android:paddingVertical="6dp" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="Mon"
+            android:textColor="#444444"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            android:paddingVertical="6dp" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="Tue"
+            android:textColor="#444444"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            android:paddingVertical="6dp" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="Wed"
+            android:textColor="#444444"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            android:paddingVertical="6dp" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="Thu"
+            android:textColor="#444444"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            android:paddingVertical="6dp" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="Fri"
+            android:textColor="#444444"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            android:paddingVertical="6dp" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="Sat"
+            android:textColor="#3F51B5"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            android:paddingVertical="6dp" />
+    </LinearLayout>
+
+
+
+
+    <!-- 달력 그리드 -->
+    <GridView
+        android:id="@+id/calendar_grid"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:numColumns="7"
+        android:verticalSpacing="8dp"
+        android:horizontalSpacing="8dp"
+        android:gravity="center"
+        android:layout_marginTop="8dp" />
+</LinearLayout>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

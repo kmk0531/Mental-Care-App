@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:padding="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="감정을 선택하세요"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:layout_marginBottom="8dp" />
+
+        <RadioGroup
+            android:id="@+id/emotion_group"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <RadioButton android:id="@+id/rb_calm" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="😌 평온" />
+            <RadioButton android:id="@+id/rb_happy" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="😊 기쁨" />
+            <RadioButton android:id="@+id/rb_sad" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="😢 슬픔" />
+            <RadioButton android:id="@+id/rb_angry" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="😡 분노" />
+            <RadioButton android:id="@+id/rb_anxious" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="😰 불안" />
+        </RadioGroup>
+
+        <EditText
+            android:id="@+id/edit_diary"
+            android:layout_width="match_parent"
+            android:layout_height="120dp"
+            android:hint="오늘의 일기를 작성하세요"
+            android:gravity="top|start"
+            android:inputType="text|textMultiLine"
+            android:lines="5"
+            android:textColor="#000000"
+            android:background="@android:drawable/edit_text"
+            android:layout_marginTop="16dp"
+            android:padding="10dp" />
+
+
+    </LinearLayout>
+</ScrollView>
