@@ -1,4 +1,4 @@
-package com.example.maps;
+package com.example.tp;
 
 
 import android.view.LayoutInflater;
