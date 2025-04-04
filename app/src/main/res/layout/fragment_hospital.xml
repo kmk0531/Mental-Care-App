@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity"
+    android:fitsSystemWindows="true">
+
+    <!-- 검색창 -->
+    <LinearLayout
+        android:id="@+id/search_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="12dp"
+        android:background="#FFFFFF"
+        android:elevation="8dp"
+        android:layout_alignParentTop="true">
+
+        <EditText
+            android:id="@+id/editText_location"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:hint="Please enter your area name" />
+
+        <Button
+            android:id="@+id/button_search"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Search" />
+    </LinearLayout>
+
+    <fragment
+        android:id="@+id/map"
+        android:name="com.google.android.gms.maps.SupportMapFragment"
+        android:layout_below="@id/search_bar"
+        android:layout_above="@+id/hospital_list"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+    <!-- 추가: 병원 카드 리스트 -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/hospital_list"
+        android:layout_width="match_parent"
+        android:layout_height="160dp"
+        android:layout_alignParentBottom="true"
+        android:padding="8dp"
+        android:clipToPadding="false"
+        android:background="#FFFFFF"
+        tools:listitem="@layout/item_hospital_card" />
+</RelativeLayout>
