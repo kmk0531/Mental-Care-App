@@ -43,4 +43,5 @@ dependencies {
     implementation(libs.google.maps)
     implementation(libs.google.places)
     implementation(libs.volley)
+    implementation("com.github.PhilJay:MPAndroidChart:v3.1.0")
 }

@@ -4,6 +4,7 @@ package com.example.tp;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,15 +14,27 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.github.mikephil.charting.charts.BarChart;
+import com.github.mikephil.charting.components.Description;
+import com.github.mikephil.charting.components.XAxis;
+import com.github.mikephil.charting.components.YAxis;
+import com.github.mikephil.charting.data.BarData;
+import com.github.mikephil.charting.data.BarDataSet;
+import com.github.mikephil.charting.data.BarEntry;
+import com.github.mikephil.charting.formatter.ValueFormatter;
+
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class CalendarFragment extends Fragment {
 
     private GridView calendarGrid;
     private TextView textMonth;
     private Button btnPrev, btnNext;
+    private BarChart barChart;
 
     private Calendar calendar;
     private final List<String> dayList = new ArrayList<>();
@@ -42,6 +55,7 @@ public class CalendarFragment extends Fragment {
         textMonth = view.findViewById(R.id.text_month);
         btnPrev = view.findViewById(R.id.btn_prev);
         btnNext = view.findViewById(R.id.btn_next);
+        barChart = view.findViewById(R.id.chart);
 
         calendar = Calendar.getInstance();
         updateCalendar();
@@ -81,6 +95,7 @@ public class CalendarFragment extends Fragment {
         int year = calendar.get(Calendar.YEAR);
         int month = calendar.get(Calendar.MONTH) + 1;
         textMonth.setText(year + "년 " + month + "월");
+        updateEmotionBarChart(year, month);
     }
 
     private void showEmotionDialog(String day) {
@@ -143,5 +158,105 @@ public class CalendarFragment extends Fragment {
         editor.putString(date + "_color", color);
         editor.putString(date + "_diary", diary);
         editor.apply();
+    }
+
+    private void updateEmotionBarChart(int year, int month) {
+        SharedPreferences prefs = context.getSharedPreferences("EmotionData", Context.MODE_PRIVATE);
+
+        Map<String, Integer> emotionCount = new HashMap<>();
+        emotionCount.put("#6B9973", 0);  // 평온
+        emotionCount.put("#D4B83D", 0);  // 기쁨
+        emotionCount.put("#828ABF", 0);  // 슬픔
+        emotionCount.put("#D68056", 0);  // 분노
+        emotionCount.put("#B26BB2", 0);  // 불안
+
+        Map<String, ?> allEntries = prefs.getAll();
+        String monthPrefix = year + "-" + month + "-";
+
+        int totalCount = 0;
+
+        for (String key : allEntries.keySet()) {
+            if (key.endsWith("_color") && key.startsWith(monthPrefix)) {
+                String color = (String) allEntries.get(key);
+                if (emotionCount.containsKey(color)) {
+                    emotionCount.put(color, emotionCount.get(color) + 1);
+                    totalCount++;
+                }
+            }
+        }
+
+        if (totalCount == 0) {
+            barChart.clear();
+            barChart.invalidate();
+            return;
+        }
+
+        List<Map.Entry<String, Integer>> sortedList = new ArrayList<>(emotionCount.entrySet());
+        sortedList.sort((e1, e2) -> e2.getValue().compareTo(e1.getValue()));
+
+        List<BarEntry> entries = new ArrayList<>();
+        List<String> labels = new ArrayList<>();
+        int maxItems = Math.min(3, sortedList.size());
+
+        for (int i = 0; i < maxItems; i++) {
+            Map.Entry<String, Integer> entry = sortedList.get(i);
+            if (entry.getValue() == 0) break;
+
+            float percentage = (entry.getValue() * 100f) / totalCount;
+
+            entries.add(new BarEntry(i, percentage));
+            labels.add(getEmotionNameByColor(entry.getKey()));
+        }
+
+        BarDataSet dataSet = new BarDataSet(entries, "감정 Top 3 (%)");
+        dataSet.setColors(Color.parseColor("#6B9973"), Color.parseColor("#D4B83D"),
+                Color.parseColor("#828ABF"), Color.parseColor("#D68056"),
+                Color.parseColor("#B26BB2"));
+        dataSet.setValueTextSize(14f);
+
+        BarData data = new BarData(dataSet);
+        data.setBarWidth(0.5f);
+
+        barChart.setDrawGridBackground(false);
+        barChart.setBackgroundColor(Color.TRANSPARENT);
+
+        barChart.setData(data);
+
+        XAxis xAxis = barChart.getXAxis();
+        xAxis.setGranularity(1f);
+        xAxis.setGranularityEnabled(true);
+        xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
+        xAxis.setDrawGridLines(false);
+
+        xAxis.setValueFormatter(new ValueFormatter() {
+            @Override
+            public String getFormattedValue(float value) {
+                int index = (int) value;
+                return (index >= 0 && index < labels.size()) ? labels.get(index) : "";
+            }
+        });
+
+        YAxis leftAxis = barChart.getAxisLeft();
+        leftAxis.setDrawGridLines(false);
+        leftAxis.setAxisMinimum(0f);
+        leftAxis.setAxisMaximum(100f);
+        barChart.getAxisRight().setEnabled(false);
+
+        Description desc = new Description();
+        desc.setText("");
+        barChart.setDescription(desc);
+
+        barChart.invalidate();
+    }
+
+    private String getEmotionNameByColor(String color) {
+        switch (color) {
+            case "#6B9973": return "평온";
+            case "#D4B83D": return "기쁨";
+            case "#828ABF": return "슬픔";
+            case "#D68056": return "분노";
+            case "#B26BB2": return "불안";
+            default: return "기타";
+        }
     }
 }

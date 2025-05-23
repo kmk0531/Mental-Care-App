@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:padding="16dp">
+
 
     <!-- 월 변경 버튼 & 현재 월 표시 -->
     <LinearLayout
@@ -34,7 +36,8 @@
             android:layout_height="wrap_content"
             android:text="⮕" />
     </LinearLayout>
-    <!-- 요일 헤더 (영문) -->
+
+    <!-- 요일 헤더 -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -120,9 +123,6 @@
             android:paddingVertical="6dp" />
     </LinearLayout>
 
-
-
-
     <!-- 달력 그리드 -->
     <GridView
         android:id="@+id/calendar_grid"
@@ -133,4 +133,23 @@
         android:horizontalSpacing="8dp"
         android:gravity="center"
         android:layout_marginTop="8dp" />
+    <!-- 기존 GridView 아래에 추가 -->
+
+    <LinearLayout
+        android:id="@+id/emotion_rank_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="12dp"
+        android:layout_marginTop="16dp"
+        android:background="@android:color/transparent" >
+
+        <com.github.mikephil.charting.charts.BarChart
+            android:id="@+id/chart"
+            android:layout_width="match_parent"
+            android:layout_height="300dp"
+            android:layout_margin="10dp" />
+    </LinearLayout>
+
+
 </LinearLayout>
