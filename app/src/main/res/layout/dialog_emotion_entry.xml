@@ -1,48 +1,359 @@
-<?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
     <LinearLayout
-        android:orientation="vertical"
-        android:padding="20dp"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="감정을 선택하세요"
-            android:textSize="18sp"
-            android:textStyle="bold"
-            android:layout_marginBottom="8dp" />
+        <LinearLayout
+            android:id="@+id/layout_write_entry"
+            android:orientation="vertical"
+            android:padding="20dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
-        <RadioGroup
-            android:id="@+id/emotion_group"
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="감정을 선택하고 정도를 입력하세요"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:layout_marginBottom="8dp" />
+
+            <!-- 기쁨 -->
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:layout_marginBottom="4dp">
+
+                <CheckBox
+                    android:id="@+id/cb_joy"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="기쁨" />
+
+                <ImageView
+                    android:id="@+id/img_joy"
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:src="@drawable/character_joy"
+                    android:layout_marginStart="8dp" />
+
+                <EditText
+                    android:id="@+id/et_joy_percentage"
+                    android:layout_width="60dp"
+                    android:layout_height="wrap_content"
+                    android:inputType="number"
+                    android:hint="%"
+                    android:maxLength="3"
+                    android:enabled="false"
+                    android:gravity="center" />
+            </LinearLayout>
+
+            <!-- 행복 -->
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:layout_marginBottom="4dp">
+
+                <CheckBox
+                    android:id="@+id/cb_happy"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="행복" />
+
+                <ImageView
+                    android:id="@+id/img_happy"
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:src="@drawable/character_happy"
+                    android:layout_marginStart="8dp" />
+
+                <EditText
+                    android:id="@+id/et_happy_percentage"
+                    android:layout_width="60dp"
+                    android:layout_height="wrap_content"
+                    android:inputType="number"
+                    android:hint="%"
+                    android:maxLength="3"
+                    android:enabled="false"
+                    android:gravity="center" />
+            </LinearLayout>
+
+            <!-- 뿌듯 -->
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:layout_marginBottom="4dp">
+
+                <CheckBox
+                    android:id="@+id/cb_proud"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="뿌듯" />
+
+                <ImageView
+                    android:id="@+id/img_proud"
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:src="@drawable/character_proud"
+                    android:layout_marginStart="8dp" />
+
+                <EditText
+                    android:id="@+id/et_proud_percentage"
+                    android:layout_width="60dp"
+                    android:layout_height="wrap_content"
+                    android:inputType="number"
+                    android:hint="%"
+                    android:maxLength="3"
+                    android:enabled="false"
+                    android:gravity="center" />
+            </LinearLayout>
+
+            <!-- 피곤 -->
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:layout_marginBottom="4dp">
+
+                <CheckBox
+                    android:id="@+id/cb_tired"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="피곤" />
+
+                <ImageView
+                    android:id="@+id/img_tired"
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:src="@drawable/character_depressed"
+                    android:layout_marginStart="8dp" />
+
+                <EditText
+                    android:id="@+id/et_tired_percentage"
+                    android:layout_width="60dp"
+                    android:layout_height="wrap_content"
+                    android:inputType="number"
+                    android:hint="%"
+                    android:maxLength="3"
+                    android:enabled="false"
+                    android:gravity="center" />
+            </LinearLayout>
+
+            <!-- 우울 -->
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:layout_marginBottom="4dp">
+
+                <CheckBox
+                    android:id="@+id/cb_depressed"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="우울" />
+
+                <ImageView
+                    android:id="@+id/img_depressed"
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:src="@drawable/character_depressed"
+                    android:layout_marginStart="8dp" />
+
+                <EditText
+                    android:id="@+id/et_depressed_percentage"
+                    android:layout_width="60dp"
+                    android:layout_height="wrap_content"
+                    android:inputType="number"
+                    android:hint="%"
+                    android:maxLength="3"
+                    android:enabled="false"
+                    android:gravity="center" />
+            </LinearLayout>
+
+            <!-- 슬픔 -->
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:layout_marginBottom="4dp">
+
+                <CheckBox
+                    android:id="@+id/cb_sad"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="슬픔" />
+
+                <ImageView
+                    android:id="@+id/img_sad"
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:src="@drawable/character_sad"
+                    android:layout_marginStart="8dp" />
+
+                <EditText
+                    android:id="@+id/et_sad_percentage"
+                    android:layout_width="60dp"
+                    android:layout_height="wrap_content"
+                    android:inputType="number"
+                    android:hint="%"
+                    android:maxLength="3"
+                    android:enabled="false"
+                    android:gravity="center" />
+            </LinearLayout>
+
+            <!-- 분노 -->
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:layout_marginBottom="4dp">
+
+                <CheckBox
+                    android:id="@+id/cb_angry"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="분노" />
+
+                <ImageView
+                    android:id="@+id/img_angry"
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:src="@drawable/character_angry"
+                    android:layout_marginStart="8dp" />
+
+                <EditText
+                    android:id="@+id/et_angry_percentage"
+                    android:layout_width="60dp"
+                    android:layout_height="wrap_content"
+                    android:inputType="number"
+                    android:hint="%"
+                    android:maxLength="3"
+                    android:enabled="false"
+                    android:gravity="center" />
+            </LinearLayout>
+
+            <!-- 불안 -->
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:layout_marginBottom="4dp">
+
+                <CheckBox
+                    android:id="@+id/cb_anxious"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="불안" />
+
+                <ImageView
+                    android:id="@+id/img_anxious"
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:src="@drawable/character_anxious"
+                    android:layout_marginStart="8dp" />
+
+                <EditText
+                    android:id="@+id/et_anxious_percentage"
+                    android:layout_width="60dp"
+                    android:layout_height="wrap_content"
+                    android:inputType="number"
+                    android:hint="%"
+                    android:maxLength="3"
+                    android:enabled="false"
+                    android:gravity="center" />
+            </LinearLayout>
+
+            <!-- 평온 -->
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:layout_marginBottom="4dp">
+
+                <CheckBox
+                    android:id="@+id/cb_calm"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="평온" />
+
+                <ImageView
+                    android:id="@+id/img_calm"
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:src="@drawable/character_calm"
+                    android:layout_marginStart="8dp" />
+
+                <EditText
+                    android:id="@+id/et_calm_percentage"
+                    android:layout_width="60dp"
+                    android:layout_height="wrap_content"
+                    android:inputType="number"
+                    android:hint="%"
+                    android:maxLength="3"
+                    android:enabled="false"
+                    android:gravity="center" />
+            </LinearLayout>
+
+            <EditText
+                android:id="@+id/edit_diary"
+                android:layout_width="match_parent"
+                android:layout_height="120dp"
+                android:hint="오늘의 일기를 작성하세요"
+                android:gravity="top|start"
+                android:inputType="text|textMultiLine"
+                android:lines="5"
+                android:textColor="#000000"
+                android:background="@android:drawable/edit_text"
+                android:layout_marginTop="16dp"
+                android:padding="10dp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/layout_view_entries"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:visibility="gone"
+            android:padding="20dp">
 
-            <RadioButton android:id="@+id/rb_calm" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="😌 평온" />
-            <RadioButton android:id="@+id/rb_happy" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="😊 기쁨" />
-            <RadioButton android:id="@+id/rb_sad" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="😢 슬픔" />
-            <RadioButton android:id="@+id/rb_angry" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="😡 분노" />
-            <RadioButton android:id="@+id/rb_anxious" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="😰 불안" />
-        </RadioGroup>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="이전 일기 목록"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:layout_marginBottom="8dp" />
 
-        <EditText
-            android:id="@+id/edit_diary"
-            android:layout_width="match_parent"
-            android:layout_height="120dp"
-            android:hint="오늘의 일기를 작성하세요"
-            android:gravity="top|start"
-            android:inputType="text|textMultiLine"
-            android:lines="5"
-            android:textColor="#000000"
-            android:background="@android:drawable/edit_text"
-            android:layout_marginTop="16dp"
-            android:padding="10dp" />
+            <ListView
+                android:id="@+id/list_previous_entries"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:dividerHeight="8dp"
+                android:layout_marginBottom="16dp"/>
 
-
+            <Button
+                android:id="@+id/btn_add_entry"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="새 일기 작성"
+                android:layout_gravity="center_horizontal"/>
+        </LinearLayout>
     </LinearLayout>
 </ScrollView>

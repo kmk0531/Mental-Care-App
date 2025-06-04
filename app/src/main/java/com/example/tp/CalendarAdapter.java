@@ -18,12 +18,14 @@ public class CalendarAdapter extends BaseAdapter {
     private LayoutInflater inflater;
     private int year;
     private int month;
+    private java.util.Map<String, String> emotionColorMap;
 
-    public CalendarAdapter(Context context, List<String> dayList, int year, int month) {
+    public CalendarAdapter(Context context, List<String> dayList, int year, int month, java.util.Map<String, String> emotionColorMap) {
         this.context = context;
         this.dayList = dayList;
         this.year = year;
         this.month = month;
+        this.emotionColorMap = emotionColorMap;
         inflater = LayoutInflater.from(context);
     }
 
@@ -50,9 +52,8 @@ public class CalendarAdapter extends BaseAdapter {
         dayText.setText(day);
 
         if (!day.isEmpty()) {
-            String fullDate = year + "-" + (month + 1) + "-" + day;
-            SharedPreferences prefs = context.getSharedPreferences("EmotionData", Context.MODE_PRIVATE);
-            String colorHex = prefs.getString(fullDate + "_color", null);
+            String fullDate = String.format("%04d-%02d-%02d", year, month + 1, Integer.parseInt(day));
+            String colorHex = emotionColorMap.get(fullDate);
             if (colorHex != null) {
                 gridItem.setBackgroundColor(Color.parseColor(colorHex));
             }

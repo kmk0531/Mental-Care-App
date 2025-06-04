@@ -28,12 +28,20 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
+        <activity android:name=".SurveyActivity" />
+        <activity android:name=".PagedGAD7Activity" />
+        <activity android:name=".PagedPHQ9Activity" />
+        <activity android:name=".PagedPSSActivity" />
+        <activity android:name=".ResultActivity" />
+        <activity android:name=".HistoryActivity" />
         <activity android:name=".MainActivity" />
         <!-- Google Maps API Key -->
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyCl5EbxtatiDu8EeGZ_7z8P6n_n1Wa2aEo" />
+        <meta-data
+            android:name="preloaded_fonts"
+            android:resource="@array/preloaded_fonts" />
     </application>
 
 </manifest>

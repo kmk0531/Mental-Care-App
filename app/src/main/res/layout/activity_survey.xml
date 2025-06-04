@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#FAFAFA"
+    android:fitsSystemWindows="true">
+
+
+    <!-- GAD-7 검사 버튼 -->
+    <Button
+        android:id="@+id/button_gad7"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:paddingTop="16dp"
+        android:text="GAD-7 불안 검사"
+        android:layout_marginBottom="16dp"
+        android:background="@drawable/bg_option_button"
+        android:textSize="25sp"
+        android:textColor="#000000" />
+
+    <!-- PHQ-9 검사 버튼 -->
+    <Button
+        android:id="@+id/button_phq9"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:text="PHQ-9 우울 검사"
+        android:layout_marginBottom="16dp"
+        android:background="@drawable/bg_option_button"
+        android:textSize="25sp"
+        android:textColor="#000000" />
+
+    <!-- 스트레스 검사 버튼 -->
+    <Button
+        android:id="@+id/button_pss"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:text="PSS 스트레스 검사"
+        android:layout_marginBottom="16dp"
+        android:background="@drawable/bg_option_button"
+        android:textSize="25sp"
+        android:textColor="#000000" />
+
+    <!-- 검사 결과 확인 버튼 -->
+    <Button
+        android:id="@+id/button_history"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:text="검사 결과 보기"
+        android:background="@drawable/bg_option_button"
+        android:textSize="25sp"
+        android:textColor="#000000" />
+
+</LinearLayout>

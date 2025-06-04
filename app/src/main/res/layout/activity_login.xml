@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="#ECECEA">
 
     <TextView
         android:id="@+id/titleText"
@@ -16,46 +17,66 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
+    <ImageView
+        android:id="@+id/logo"
+        android:layout_width="160dp"
+        android:layout_height="160dp"
+        android:src="@drawable/minee"
+        app:layout_constraintTop_toBottomOf="@id/titleText"
+        app:layout_constraintBottom_toTopOf="@id/inmindText"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="16dp" />
+
     <TextView
-        android:id="@+id/usertext"
+        android:id="@+id/inmindText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="USERNAME"
-        android:textSize="20dp"
-        app:layout_constraintTop_toBottomOf="@id/titleText"
+        android:text="In:Mind"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:textColor="@android:color/black"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintTop_toBottomOf="@id/logo"
+        app:layout_constraintBottom_toTopOf="@id/edit_email"
         app:layout_constraintStart_toStartOf="parent"
-        android:layout_marginTop="100dp" />
+        app:layout_constraintEnd_toEndOf="parent"
+        android:elevation="4dp" />
 
     <EditText
         android:id="@+id/edit_email"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        app:layout_constraintStart_toEndOf="@id/usertext"
-        app:layout_constraintBaseline_toBaselineOf="@id/usertext"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="5dp"/>
+        android:background="@drawable/rounded_edittext"
+        android:layout_width="327dp"
+        android:layout_height="40dp"
+        android:hint="email@domain.com"
+        android:inputType="textEmailAddress"
+        android:paddingTop="8dp"
+        android:paddingBottom="8dp"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp"
+        android:textSize="14sp"
+        app:layout_constraintTop_toBottomOf="@id/inmindText"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
 
-    <TextView
-        android:id="@+id/userpass"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="PASSWORD"
-        android:textSize="20dp"
-        android:layout_marginTop="50dp"
-        app:layout_constraintTop_toBottomOf="@id/usertext"
-        app:layout_constraintStart_toStartOf="parent" />
 
     <EditText
         android:id="@+id/edit_password"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:background="@drawable/rounded_edittext"
+        android:layout_width="327dp"
+        android:layout_height="40dp"
+        android:hint="password"
         android:inputType="textPassword"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="5dp"
-        app:layout_constraintStart_toEndOf="@id/userpass"
+        android:paddingTop="8dp"
+        android:paddingBottom="8dp"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp"
+        android:textSize="14sp"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBaseline_toBaselineOf="@id/userpass" />
+        app:layout_constraintTop_toBottomOf="@id/edit_email" />
 
     <Button
         android:id="@+id/submit"
@@ -63,7 +84,7 @@
         android:layout_height="wrap_content"
         android:text="Submit"
         android:layout_marginTop="60dp"
-        app:layout_constraintTop_toBottomOf="@id/userpass"
+        app:layout_constraintTop_toBottomOf="@id/edit_password"
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
@@ -73,7 +94,7 @@
         android:text="Exit"
         android:layout_marginTop="60dp"
         android:layout_marginStart="16dp"
-        app:layout_constraintTop_toBottomOf="@id/userpass"
+        app:layout_constraintTop_toBottomOf="@id/edit_password"
         app:layout_constraintStart_toEndOf="@id/submit" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -60,10 +60,15 @@ public class LoginActivity extends AppCompatActivity{
                 response -> {
                     try {
                         String token = response.getString("token");
-
+                        int userId = response.getInt("user_id");
+                        String nickname = response.getString("nickname");
                         // JWT 저장
                         SharedPreferences prefs = getSharedPreferences("auth", MODE_PRIVATE);
-                        prefs.edit().putString("jwt_token", token).apply();
+                        SharedPreferences.Editor editor = prefs.edit();
+                        editor.putString("jwt_token", token);
+                        editor.putInt("user_id", userId);
+                        editor.putString("nickname", nickname);
+                        editor.apply();
 
                         Toast.makeText(this, "로그인 성공!", Toast.LENGTH_SHORT).show();
 

@@ -32,7 +32,6 @@ android {
 }
 
 dependencies {
-
     implementation(libs.appcompat)
     implementation(libs.material)
     implementation(libs.activity)
@@ -43,5 +42,8 @@ dependencies {
     implementation(libs.google.maps)
     implementation(libs.google.places)
     implementation(libs.volley)
-    implementation("com.github.PhilJay:MPAndroidChart:v3.1.0")
+    implementation(libs.mpandroidchart)
+    implementation(libs.circleimageview)
+    implementation(libs.room.runtime)
+    annotationProcessor(libs.room.compiler)
 }

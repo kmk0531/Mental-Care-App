@@ -3,6 +3,7 @@ package com.example.tp;
 import android.os.Bundle;
 
 import androidx.activity.EdgeToEdge;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
@@ -18,13 +19,18 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_main);
+        findViewById(R.id.profile_icon).setOnClickListener(v -> {
+            getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.fragment_container, new MyPageFragment())
+                    .addToBackStack(null)
+                    .commit();
+        });
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
-
         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new CalendarFragment()).commit();
         bottomNavigationView.setOnItemSelectedListener(item -> {
             Fragment selectedFragment = null;
@@ -36,6 +42,8 @@ public class MainActivity extends AppCompatActivity {
                 selectedFragment = new ChatbotFragment();
             } else if (id == R.id.nav_map) {
                 selectedFragment = new MapFragment();
+            } else if (id == R.id.nav_therapy){
+                selectedFragment = new TherapyFragment();
             }
             if (selectedFragment != null) {
                 getSupportFragmentManager().beginTransaction()

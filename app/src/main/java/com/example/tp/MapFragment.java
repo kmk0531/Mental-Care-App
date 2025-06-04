@@ -16,6 +16,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.widget.Toolbar;
 import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -49,7 +50,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
     private GoogleMap mMap;
     private FusedLocationProviderClient fusedLocationClient;
     private RequestQueue requestQueue;
-    private final String apiKey = "YOUR_API_KEY";
+    private final String apiKey = "AIzaSyCl5EbxtatiDu8EeGZ_7z8P6n_n1Wa2aEo";
 
     private List<Hospital> hospitalList = new ArrayList<>();
     private RecyclerView hospitalRecyclerView;
@@ -67,7 +68,6 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
 
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(requireContext());
         requestQueue = Volley.newRequestQueue(requireContext());
-
         EditText editTextLocation = view.findViewById(R.id.editText_location);
         Button buttonSearch = view.findViewById(R.id.button_search);
         hospitalRecyclerView = view.findViewById(R.id.hospital_list);
