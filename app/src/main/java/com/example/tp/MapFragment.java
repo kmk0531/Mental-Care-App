@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -69,7 +70,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(requireContext());
         requestQueue = Volley.newRequestQueue(requireContext());
         EditText editTextLocation = view.findViewById(R.id.editText_location);
-        Button buttonSearch = view.findViewById(R.id.button_search);
+        ImageButton buttonSearch = view.findViewById(R.id.button_search);
         hospitalRecyclerView = view.findViewById(R.id.hospital_list);
 
         hospitalRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));

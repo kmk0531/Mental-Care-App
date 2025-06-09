@@ -68,6 +68,11 @@ public class ChatbotFragment extends Fragment {
             }
         });
 
+        new android.app.AlertDialog.Builder(requireContext())
+                .setTitle("주의 사항")
+                .setMessage("이 앱은 전문적인 의료 조언이나 치료를 대체하지 않습니다. 필요한 경우 반드시 전문가의 상담을 받으시기 바랍니다.")
+                .setPositiveButton("확인", null)
+                .show();
         return view;
 
     }

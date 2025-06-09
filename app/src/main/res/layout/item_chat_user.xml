@@ -9,6 +9,7 @@
     android:id="@+id/text_message"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
+    android:background="@drawable/rounded_shape"
     android:textColor="@android:color/black"
     android:textSize="16sp"
     android:padding="10dp"

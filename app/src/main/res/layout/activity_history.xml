@@ -2,24 +2,33 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:padding="24dp"
-    android:background="#FAFAFA">
+    android:orientation="vertical">
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="검사 결과 기록"
-        android:textSize="22sp"
-        android:textStyle="bold"
-        android:layout_marginBottom="16dp"
-        android:textColor="#000000" />
+    <include
+        layout="@layout/survey_top_bar" />
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recycler_results"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:clipToPadding="false"
-        android:paddingBottom="16dp" />
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="24dp"
+        android:background="#FAFAFA">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="검사 결과 기록"
+            android:textSize="22sp"
+            android:textStyle="bold"
+            android:layout_marginBottom="16dp"
+            android:textColor="#000000" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycler_results"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:clipToPadding="false"
+            android:paddingBottom="16dp" />
+    </LinearLayout>
 </LinearLayout>

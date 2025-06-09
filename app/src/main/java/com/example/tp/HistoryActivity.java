@@ -1,6 +1,7 @@
 package com.example.tp;
 
 import android.os.Bundle;
+import android.widget.ImageView;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -16,6 +17,9 @@ public class HistoryActivity extends AppCompatActivity{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_history);
+
+        ImageView backButton = findViewById(R.id.back_button);
+        backButton.setOnClickListener(v -> finish());
 
         recyclerView = findViewById(R.id.recycler_results);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));

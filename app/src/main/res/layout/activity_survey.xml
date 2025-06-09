@@ -1,58 +1,149 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:background="#FAFAFA"
-    android:fitsSystemWindows="true">
+    android:layout_height="match_parent">
 
-
-    <!-- GAD-7 검사 버튼 -->
-    <Button
-        android:id="@+id/button_gad7"
+    <include
+        layout="@layout/survey_top_bar"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:paddingTop="16dp"
-        android:text="GAD-7 불안 검사"
-        android:layout_marginBottom="16dp"
-        android:background="@drawable/bg_option_button"
-        android:textSize="25sp"
-        android:textColor="#000000" />
+        android:layout_height="56dp"
+        android:layout_gravity="top" />
 
-    <!-- PHQ-9 검사 버튼 -->
-    <Button
-        android:id="@+id/button_phq9"
+    <LinearLayout
+        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:text="PHQ-9 우울 검사"
-        android:layout_marginBottom="16dp"
-        android:background="@drawable/bg_option_button"
-        android:textSize="25sp"
-        android:textColor="#000000" />
+        android:layout_height="match_parent"
+        android:background="#FAFAFA"
+        android:padding="16dp"
+        android:layout_marginTop="56dp">
 
-    <!-- 스트레스 검사 버튼 -->
-    <Button
-        android:id="@+id/button_pss"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:text="PSS 스트레스 검사"
-        android:layout_marginBottom="16dp"
-        android:background="@drawable/bg_option_button"
-        android:textSize="25sp"
-        android:textColor="#000000" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="자가진단 테스트"
+            android:textSize="22sp"
+            android:textStyle="bold"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="24dp"
+            android:layout_marginBottom="16dp" />
 
-    <!-- 검사 결과 확인 버튼 -->
-    <Button
-        android:id="@+id/button_history"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:text="검사 결과 보기"
-        android:background="@drawable/bg_option_button"
-        android:textSize="25sp"
-        android:textColor="#000000" />
+        <!-- 테스트 카드 목록 -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp">
 
-</LinearLayout>
+            <!-- 각 테스트 항목 -->
+            <LinearLayout
+                android:id="@+id/button_phq9"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_option_button"
+                android:orientation="horizontal"
+                android:padding="16dp"
+                android:layout_marginBottom="12dp"
+                android:gravity="center_vertical">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="우울 테스트"
+                        android:textSize="16sp"
+                        android:textColor="#000000" />
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <!-- 복붙해서 나머지 항목 수정 -->
+            <!-- 불안 테스트 -->
+            <LinearLayout
+                android:id="@+id/button_gad7"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_option_button"
+                android:orientation="horizontal"
+                android:padding="16dp"
+                android:layout_marginBottom="12dp"
+                android:gravity="center_vertical">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="불안 테스트"
+                        android:textSize="16sp"
+                        android:textColor="#000000" />
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <!-- 스트레스 테스트 -->
+            <LinearLayout
+                android:id="@+id/button_pss"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_option_button"
+                android:orientation="horizontal"
+                android:padding="16dp"
+                android:layout_marginBottom="12dp"
+                android:gravity="center_vertical">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="스트레스 테스트"
+                        android:textSize="16sp"
+                        android:textColor="#000000" />
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <!-- 지난 테스트 결과 -->
+            <LinearLayout
+                android:id="@+id/button_history"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_option_button"
+                android:orientation="horizontal"
+                android:padding="16dp"
+                android:layout_marginBottom="12dp"
+                android:gravity="center_vertical">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="지난 테스트 결과"
+                        android:textSize="16sp"
+                        android:textColor="#000000" />
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </LinearLayout>
+    </LinearLayout>
+</FrameLayout>

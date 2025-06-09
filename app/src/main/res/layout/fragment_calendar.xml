@@ -135,21 +135,38 @@
         android:layout_marginTop="8dp" />
     <!-- 기존 GridView 아래에 추가 -->
 
-    <LinearLayout
-        android:id="@+id/emotion_rank_layout"
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:padding="12dp"
-        android:layout_marginTop="16dp"
-        android:background="@android:color/transparent" >
+        android:fillViewport="true">
+        <LinearLayout
+            android:id="@+id/emotion_rank_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="12dp"
+            android:layout_marginTop="16dp"
+            android:background="@android:color/transparent" >
 
         <com.github.mikephil.charting.charts.BarChart
             android:id="@+id/chart"
             android:layout_width="match_parent"
             android:layout_height="300dp"
             android:layout_margin="10dp" />
-    </LinearLayout>
+
+        <TextView
+            android:id="@+id/tv_emotion_words_summary"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="자주 등장하는 단어: 로딩 중..."
+            android:textSize="16sp"
+            android:textStyle="italic"
+            android:textColor="#444444"
+            android:paddingTop="12dp"
+            android:paddingBottom="8dp"
+            android:gravity="center_horizontal" />
+        </LinearLayout>
+    </ScrollView>
 
 
 </LinearLayout>

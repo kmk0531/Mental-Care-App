@@ -1,236 +1,205 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FAFAFA"
-    android:padding="16dp">
+    android:orientation="vertical"
+    android:background="#FAFAFA">
 
-    <LinearLayout
-        android:orientation="vertical"
+    <include
+        layout="@layout/therapy_top_bar"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="56dp" />
 
-        <!-- 명상 타이틀 -->
-        <TextView
-            android:id="@+id/btn_meditation"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="명상"
-            android:textSize="24sp"
-            android:textStyle="bold"
-            android:textColor="#333333"
-            android:gravity="left"
-            android:paddingBottom="8dp" />
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:padding="16dp">
 
-
-
-
-        <!-- 명상 유튜브 링크들 (숨김, 토글용) -->
         <LinearLayout
-            android:id="@+id/layout_meditation_links"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:visibility="gone"
-            android:paddingBottom="24dp">
+            android:orientation="vertical">
+
+            <!-- 인사 텍스트 -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Good Morning,"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                android:textColor="#000000"
+                android:layout_marginBottom="4dp"/>
 
             <TextView
-                android:id="@+id/youtube_link_5"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="5분 명상 유튜브"
-                android:textColor="#1a73e8"
-                android:textSize="18sp"
-                android:padding="12dp"
-                android:clickable="true"
-                android:focusable="true"
-                android:background="?attr/selectableItemBackground" />
+                android:text="We Wish you have a good day"
+                android:textSize="16sp"
+                android:textColor="#666666"
+                android:layout_marginBottom="16dp"/>
 
-            <TextView
-                android:id="@+id/youtube_link_10"
+            <!-- 가이드 카드 영역 -->
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="10분 명상 유튜브"
-                android:textColor="#1a73e8"
-                android:textSize="18sp"
-                android:padding="12dp"
-                android:clickable="true"
-                android:focusable="true"
-                android:background="?attr/selectableItemBackground" />
+                android:orientation="horizontal"
+                android:layout_marginBottom="16dp"
+                android:gravity="center">
 
-            <TextView
-                android:id="@+id/youtube_link_15"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="15분 명상 유튜브"
-                android:textColor="#1a73e8"
-                android:textSize="18sp"
-                android:padding="12dp"
-                android:clickable="true"
-                android:focusable="true"
-                android:background="?attr/selectableItemBackground" />
+                <!-- 명상 카드 -->
+                <RelativeLayout
+                    android:layout_width="0dp"
+                    android:layout_height="150dp"
+                    android:layout_weight="1"
+                    android:background="#769D7F"
+                    android:padding="12dp"
+                    android:layout_marginEnd="8dp">
 
-            <TextView
-                android:id="@+id/youtube_link_30"
+                    <ImageView
+                        android:id="@+id/minee_icon_1"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:src="@drawable/character_calm"
+                        android:layout_alignParentTop="true"
+                        android:layout_alignParentEnd="true"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="명상"
+                        android:textStyle="bold"
+                        android:textColor="#FFFFFF"
+                        android:textSize="16sp"
+                        android:layout_below="@id/minee_icon_1"
+                        android:layout_marginTop="8dp"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Guide"
+                        android:textColor="#FFFFFF"
+                        android:layout_below="@+id/minee_icon_1"
+                        android:layout_marginTop="32dp"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="3-10 MIN"
+                        android:textColor="#FFFFFF"
+                        android:layout_alignParentBottom="true"
+                        android:layout_alignParentStart="true"/>
+                    <Button
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/btn_meditation"
+                        android:text="START"
+                        android:backgroundTint="#EBEAEC"
+                        android:fontFamily="@font/inter_medium"
+                        android:textSize="12sp"
+                        android:textStyle="bold"
+                        android:textColor="#3F414E"
+                        android:layout_alignParentBottom="true"
+                        android:layout_alignParentEnd="true"/>
+                </RelativeLayout>
+
+                <!-- 스트레칭 카드 -->
+                <RelativeLayout
+                    android:layout_width="0dp"
+                    android:layout_height="150dp"
+                    android:layout_weight="1"
+                    android:background="#F5D56E"
+                    android:padding="12dp"
+                    android:layout_marginStart="8dp">
+
+                    <ImageView
+                        android:id="@+id/minee_icon_2"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:src="@drawable/character_joy"
+                        android:layout_alignParentTop="true"
+                        android:layout_alignParentEnd="true"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="스트레칭"
+                        android:textStyle="bold"
+                        android:textColor="#000000"
+                        android:textSize="16sp"
+                        android:layout_below="@id/minee_icon_2"
+                        android:layout_marginTop="8dp"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Guide"
+                        android:textColor="#000000"
+                        android:layout_below="@+id/minee_icon_2"
+                        android:layout_marginTop="32dp"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="3-10 MIN"
+                        android:textColor="#000000"
+                        android:layout_alignParentBottom="true"
+                        android:layout_alignParentStart="true"/>
+
+                    <Button
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/btn_stretching"
+                        android:text="START"
+                        android:backgroundTint="#3F414E"
+                        android:fontFamily="@font/inter_medium"
+                        android:textSize="12sp"
+                        android:textStyle="bold"
+                        android:textColor="#EBEAEC"
+                        android:layout_alignParentBottom="true"
+                        android:layout_alignParentEnd="true"/>
+                </RelativeLayout>
+            </LinearLayout>
+
+            <!-- 자가진단 카드 -->
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="30분 명상 유튜브"
-                android:textColor="#1a73e8"
-                android:textSize="18sp"
-                android:padding="12dp"
-                android:clickable="true"
-                android:focusable="true"
-                android:background="?attr/selectableItemBackground" />
+                android:layout_height="80dp"
+                android:orientation="horizontal"
+                android:background="#2F2F3C"
+                android:padding="16dp"
+                android:gravity="center_vertical"
+                android:layout_marginBottom="16dp">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="자가진단 테스트"
+                        android:textColor="#FFFFFF"
+                        android:textStyle="bold"
+                        android:textSize="16sp"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="3-10 MIN"
+                        android:textColor="#FFFFFF"/>
+                </LinearLayout>
+
+                <ImageView
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:src="@drawable/ic_play"
+                    android:id="@+id/btn_autodiagnosis"/>
+            </LinearLayout>
 
         </LinearLayout>
-        <!-- 명상 이미지 -->
-        <ImageView
-            android:id="@+id/img_meditation"
-            android:layout_width="match_parent"
-            android:layout_height="250dp"
-            android:scaleType="centerCrop"
-            android:src="@drawable/meditation"
-            android:contentDescription="명상 이미지"
-            android:layout_marginBottom="16dp" />
-        <!-- 스트레칭 타이틀 -->
-        <TextView
-            android:id="@+id/btn_stretching"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="스트레칭"
-            android:textSize="24sp"
-            android:textStyle="bold"
-            android:textColor="#333333"
-            android:gravity="left"
-            android:paddingBottom="8dp" />
-
-
-
-        <!-- 스트레칭 유튜브 링크들 (숨김, 토글용) -->
-        <LinearLayout
-            android:id="@+id/layout_stretching_links"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:visibility="gone"
-            android:paddingBottom="24dp">
-
-            <TextView
-                android:id="@+id/stretching_link_5"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="5분 스트레칭 유튜브"
-                android:textColor="#1a73e8"
-                android:textSize="18sp"
-                android:padding="12dp"
-                android:clickable="true"
-                android:focusable="true"
-                android:background="?attr/selectableItemBackground" />
-
-            <TextView
-                android:id="@+id/stretching_link_10"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="10분 스트레칭 유튜브"
-                android:textColor="#1a73e8"
-                android:textSize="18sp"
-                android:padding="12dp"
-                android:clickable="true"
-                android:focusable="true"
-                android:background="?attr/selectableItemBackground" />
-
-            <TextView
-                android:id="@+id/stretching_link_15"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="15분 스트레칭 유튜브"
-                android:textColor="#1a73e8"
-                android:textSize="18sp"
-                android:padding="12dp"
-                android:clickable="true"
-                android:focusable="true"
-                android:background="?attr/selectableItemBackground" />
-
-            <TextView
-                android:id="@+id/stretching_link_30"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="30분 스트레칭 유튜브"
-                android:textColor="#1a73e8"
-                android:textSize="18sp"
-                android:padding="12dp"
-                android:clickable="true"
-                android:focusable="true"
-                android:background="?attr/selectableItemBackground" />
-        </LinearLayout>
-        <!-- 스트레칭 이미지 -->
-        <ImageView
-            android:id="@+id/img_stretching"
-            android:layout_width="match_parent"
-            android:layout_height="250dp"
-            android:scaleType="centerCrop"
-            android:src="@drawable/streching"
-            android:contentDescription="스트레칭 이미지"
-            android:layout_marginBottom="16dp" />
-        <!-- 자가진단 -->
-        <TextView
-            android:id="@+id/btn_autodiagnosis"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="자가진단"
-            android:textSize="24sp"
-            android:textStyle="bold"
-            android:textColor="#333333"
-            android:gravity="left"
-            android:paddingBottom="8dp" />
-        <!-- 자가진단 테스트 리스트 (숨김, 토글용) -->
-        <LinearLayout
-            android:id="@+id/layout_autodiagnosis_links"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:visibility="gone"
-            android:paddingBottom="24dp">
-
-            <TextView
-                android:id="@+id/test_link_1"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="우울증 자가진단 테스트"
-                android:textColor="#1a73e8"
-                android:textSize="18sp"
-                android:padding="12dp"
-                android:clickable="true"
-                android:focusable="true"
-                android:background="?attr/selectableItemBackground" />
-
-            <TextView
-                android:id="@+id/test_link_2"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="불안장애 자가진단 테스트"
-                android:textColor="#1a73e8"
-                android:textSize="18sp"
-                android:padding="12dp"
-                android:clickable="true"
-                android:focusable="true"
-                android:background="?attr/selectableItemBackground" />
-
-            <TextView
-                android:id="@+id/test_link_3"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="스트레스 자가진단 테스트"
-                android:textColor="#1a73e8"
-                android:textSize="18sp"
-                android:padding="12dp"
-                android:clickable="true"
-                android:focusable="true"
-                android:background="?attr/selectableItemBackground" />
-        </LinearLayout>
-
-
-    </LinearLayout>
-
-</ScrollView>
+    </ScrollView>
+</LinearLayout>

@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 import androidx.annotation.NonNull;
@@ -21,22 +22,35 @@ public class MyPageFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_mypage, container, false);
 
+        ImageView backBtn = view.findViewById(R.id.back_button);
+        backBtn.setOnClickListener(v -> requireActivity().getSupportFragmentManager().popBackStack());
         // Retrieve nickname from SharedPreferences
-        android.content.SharedPreferences prefs = requireContext().getSharedPreferences("UserPrefs", android.content.Context.MODE_PRIVATE);
+        android.content.SharedPreferences prefs = requireContext().getSharedPreferences("auth", android.content.Context.MODE_PRIVATE);
         nickname = prefs.getString("nickname", "사용자");
 
         TextView tvGreeting = view.findViewById(R.id.tv_greeting);
         tvGreeting.setText("안녕하세요 " + nickname + "님");
 
         view.findViewById(R.id.item_edit_info).setOnClickListener(v ->
-                Toast.makeText(getContext(), "내 정보 변경 클릭", Toast.LENGTH_SHORT).show());
+                startActivity(new Intent(requireContext(), MyAccountActivity.class)));
 
-        view.findViewById(R.id.item_emergency_call).setOnClickListener(v ->
-                Toast.makeText(getContext(), "긴급전화 클릭", Toast.LENGTH_SHORT).show());
+        view.findViewById(R.id.item_emergency_call).setOnClickListener(v -> {
+            Intent intent = new Intent(Intent.ACTION_DIAL);
+            intent.setData(android.net.Uri.parse("tel:15889191")); // Lifeline number
+            startActivity(intent);
+        });
 
         view.findViewById(R.id.item_self_test).setOnClickListener(v ->openSurvey());
-        view.findViewById(R.id.item_logout).setOnClickListener(v ->
-                Toast.makeText(getContext(), "로그아웃 클릭", Toast.LENGTH_SHORT).show());
+        view.findViewById(R.id.item_logout).setOnClickListener(v -> {
+            android.content.SharedPreferences.Editor editor = prefs.edit();
+            editor.remove("token");
+            editor.remove("nickname");
+            editor.apply();
+
+            Intent intent = new Intent(requireContext(), LoginActivity.class);
+            startActivity(intent);
+            requireActivity().finish();
+        });
 
         return view;
     }

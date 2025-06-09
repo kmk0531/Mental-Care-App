@@ -137,6 +137,7 @@ public class CalendarFragment extends Fragment {
 
         textMonth.setText(year + "년 " + (month + 1) + "월");
         updateEmotionBarChart(year, month + 1);
+        fetchTopWordsForEmotions(year, month + 1);
     }
 
     private void showEmotionDialog(String day) {
@@ -149,38 +150,38 @@ public class CalendarFragment extends Fragment {
 
         // Set up CheckBoxes and EditTexts for percentage-based multi-emotion selection
         CheckBox[] checkBoxes = {
-            dialogView.findViewById(R.id.cb_calm),
-            dialogView.findViewById(R.id.cb_happy),
-            dialogView.findViewById(R.id.cb_sad),
-            dialogView.findViewById(R.id.cb_angry),
-            dialogView.findViewById(R.id.cb_anxious),
-            dialogView.findViewById(R.id.cb_joy),
-            dialogView.findViewById(R.id.cb_proud),
-            dialogView.findViewById(R.id.cb_tired),
-            dialogView.findViewById(R.id.cb_depressed)
+            dialogView.findViewById(R.id.cb_joy),      // 기쁨
+            dialogView.findViewById(R.id.cb_happy),    // 행복
+            dialogView.findViewById(R.id.cb_proud),    // 뿌듯
+            dialogView.findViewById(R.id.cb_tired),    // 피곤
+            dialogView.findViewById(R.id.cb_depressed),// 우울
+            dialogView.findViewById(R.id.cb_sad),      // 슬픔
+            dialogView.findViewById(R.id.cb_angry),    // 분노
+            dialogView.findViewById(R.id.cb_anxious),  // 불안
+            dialogView.findViewById(R.id.cb_calm)      // 평온
         };
 
         // Set tag for each emotion checkbox to the corresponding hex color
-        checkBoxes[0].setTag("#008000"); // 평온
-        checkBoxes[1].setTag("#FFFF00"); // 기쁨
-        checkBoxes[2].setTag("#87CEEB"); // 슬픔
-        checkBoxes[3].setTag("#FF1493"); // 분노
-        checkBoxes[4].setTag("#800080"); // 불안
-        checkBoxes[5].setTag("#FFC0CB"); // 행복
-        checkBoxes[6].setTag("#FFA500"); // 뿌듯
-        checkBoxes[7].setTag("#0000FF"); // 피곤
-        checkBoxes[8].setTag("#808080"); // 우울
+        checkBoxes[0].setTag("#F4CE6F"); // 기쁨
+        checkBoxes[1].setTag("#F3AAA8"); // 행복
+        checkBoxes[2].setTag("#D68056"); // 뿌듯
+        checkBoxes[3].setTag("#828BBF"); // 피곤
+        checkBoxes[4].setTag("#C2C3C5"); // 우울
+        checkBoxes[5].setTag("#8DB6EA"); // 슬픔
+        checkBoxes[6].setTag("#D5595B"); // 분노
+        checkBoxes[7].setTag("#976BB2"); // 불안
+        checkBoxes[8].setTag("#6B9973"); // 평온
 
         EditText[] percentFields = {
-            dialogView.findViewById(R.id.et_calm_percentage),
-            dialogView.findViewById(R.id.et_happy_percentage),
-            dialogView.findViewById(R.id.et_sad_percentage),
-            dialogView.findViewById(R.id.et_angry_percentage),
-            dialogView.findViewById(R.id.et_anxious_percentage),
-            dialogView.findViewById(R.id.et_joy_percentage),
-            dialogView.findViewById(R.id.et_proud_percentage),
-            dialogView.findViewById(R.id.et_tired_percentage),
-            dialogView.findViewById(R.id.et_depressed_percentage)
+            dialogView.findViewById(R.id.et_joy_percentage),       // 기쁨
+            dialogView.findViewById(R.id.et_happy_percentage),     // 행복
+            dialogView.findViewById(R.id.et_proud_percentage),     // 뿌듯
+            dialogView.findViewById(R.id.et_tired_percentage),     // 피곤
+            dialogView.findViewById(R.id.et_depressed_percentage), // 우울
+            dialogView.findViewById(R.id.et_sad_percentage),       // 슬픔
+            dialogView.findViewById(R.id.et_angry_percentage),     // 분노
+            dialogView.findViewById(R.id.et_anxious_percentage),   // 불안
+            dialogView.findViewById(R.id.et_calm_percentage)       // 평온
         };
         // Enable/disable percent fields based on checkbox state
         for (int i = 0; i < checkBoxes.length; i++) {
@@ -219,10 +220,24 @@ public class CalendarFragment extends Fragment {
                             List<String> diaryList = new ArrayList<>();
                             for (int i = 0; i < entries.length(); i++) {
                                 org.json.JSONObject obj = entries.getJSONObject(i);
-                                String emotion = getEmotionNameByColor(obj.optString("emotion", ""));
+                                String emotion = getEmotionNameByColor(obj.optString("dominant_emotion", ""));
                                 String diary = obj.optString("diary", "");
                                 String createdAt = obj.optString("created_at", "");
-                                diaryList.add("[" + emotion + "] " + createdAt + "\n" + diary);
+                                // Add emotion percentages
+                                org.json.JSONArray emotionsArray = obj.optJSONArray("emotions");
+                                StringBuilder emotionDetailBuilder = new StringBuilder();
+                                if (emotionsArray != null) {
+                                    for (int j = 0; j < emotionsArray.length(); j++) {
+                                        org.json.JSONObject emo = emotionsArray.getJSONObject(j);
+                                        String color = emo.optString("emotion", "");
+                                        int percent = emo.optInt("percent", 0);
+                                        emotionDetailBuilder.append(getEmotionNameByColor(color)).append(": ").append(percent).append("%");
+                                        if (j < emotionsArray.length() - 1) {
+                                            emotionDetailBuilder.append(", ");
+                                        }
+                                    }
+                                }
+                                diaryList.add("[" + emotion + "] " + createdAt + "\n" + diary + "\n" + emotionDetailBuilder.toString());
                             }
 
                             ArrayAdapter<String> adapter = new ArrayAdapter<>(context, android.R.layout.simple_list_item_1, diaryList);
@@ -459,8 +474,6 @@ public class CalendarFragment extends Fragment {
                 barChart.setDescription(desc);
 
                 barChart.invalidate();
-
-                fetchWordsForTopEmotions(year, month, userId, topEmotionColors);
             },
             error -> {
                 error.printStackTrace();
@@ -470,94 +483,90 @@ public class CalendarFragment extends Fragment {
         queue.add(request);
     }
 
-    // Modified: Show all available words per emotion instead of top 3
-    private void fetchWordsForTopEmotions(int year, int month, int userId, List<String> emotions) {
-        StringBuilder wordSummary = new StringBuilder();
+    private void fetchTopWordsForEmotions(int year, int month) {
+        SharedPreferences userPrefs = context.getSharedPreferences("auth", Context.MODE_PRIVATE);
+        int userId = userPrefs.getInt("user_id", -1);
+        if (userId == -1) {
+            Toast.makeText(context, "로그인 정보가 없습니다", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        String url = "http://10.0.2.2:3000/monthly-top-emotions-with-words?user_id=" + userId +
+                "&year=" + year + "&month=" + month;
+
         com.android.volley.RequestQueue queue = com.android.volley.toolbox.Volley.newRequestQueue(context);
-        final int[] completedCount = {0};
-
-        for (int i = 0; i < emotions.size(); i++) {
-            String emotionHex = emotions.get(i);
-            String encodedEmotion = "";
-            try {
-                encodedEmotion = URLEncoder.encode(emotionHex, "UTF-8");
-            } catch (UnsupportedEncodingException e) {
-                e.printStackTrace();
-            }
-
-            String url = "http://10.0.2.2:3000/top-words-by-emotion?user_id=" + userId + "&year=" + year + "&month=" + month + "&emotion=" + encodedEmotion;
-            final String emotionName = getEmotionNameByColor(emotionHex);
-
-            // Use JsonArrayRequest, as the response is a JSON array
-            com.android.volley.toolbox.JsonArrayRequest wordRequest = new com.android.volley.toolbox.JsonArrayRequest(
+        com.android.volley.toolbox.JsonArrayRequest request = new com.android.volley.toolbox.JsonArrayRequest(
                 com.android.volley.Request.Method.GET, url, null,
                 response -> {
-                    try {
-                        wordSummary.append(emotionName).append(": ");
-                        if (response.length() == 0) {
-                            wordSummary.append("없음\n");
-                        } else {
-                            for (int j = 0; j < response.length(); j++) {
-                                org.json.JSONObject wordObj = response.getJSONObject(j);
-                                // The real word may be inside a nested object, depending on your API
-                                // Try to extract actual word string
-                                String word = null;
-                                if (wordObj.has("word") && wordObj.get("word") instanceof String) {
-                                    word = wordObj.getString("word");
-                                } else if (wordObj.has("count") && wordObj.get("count") instanceof org.json.JSONObject) {
-                                    org.json.JSONObject countObj = wordObj.getJSONObject("count");
-                                    if (countObj.has("word")) {
-                                        word = countObj.getString("word");
-                                    }
-                                }
-                                if (word != null) {
-                                    wordSummary.append(word);
-                                    if (j < response.length() - 1) wordSummary.append(", ");
-                                }
+                    Log.d("TopWordsResponse", "서버 응답: " + response.toString());
+                    TextView textTopWords = getView().findViewById(R.id.tv_emotion_words_summary);
+                    if (textTopWords != null) {
+                        // Sort response array by descending count
+                        List<org.json.JSONObject> sortedList = new ArrayList<>();
+                        for (int i = 0; i < response.length(); i++) {
+                            try {
+                                sortedList.add(response.getJSONObject(i));
+                            } catch (org.json.JSONException e) {
+                                e.printStackTrace();
                             }
-                            wordSummary.append("\n");
                         }
-                    } catch (org.json.JSONException e) {
-                        e.printStackTrace();
-                    }
+                        sortedList.sort((o1, o2) -> {
+                            try {
+                                return Integer.compare(o2.getInt("count"), o1.getInt("count"));
+                            } catch (org.json.JSONException e) {
+                                e.printStackTrace();
+                                return 0; // fallback for sorting when error occurs
+                            }
+                        });
 
-                    completedCount[0]++;
-                    if (completedCount[0] == emotions.size()) {
-                        new AlertDialog.Builder(context)
-                            .setTitle("감정별 주요 키워드")
-                            .setMessage(wordSummary.toString())
-                            .setPositiveButton("확인", null)
-                            .show();
+                        if (sortedList.isEmpty()) {
+                            textTopWords.setText("저장된 일기가 없습니다.");
+                            return;
+                        }
+
+                        StringBuilder sb = new StringBuilder();
+                        for (org.json.JSONObject item : sortedList) {
+                            try {
+                                String label = getEmotionNameByColor(item.optString("emotion", "").trim().toUpperCase());
+                                // String color = item.optString("emotion", "");
+                                int count = item.optInt("count", 0);
+                                // sb.append(String.format("[%s %s] (%d회)\n", label, color, count));
+                                sb.append(String.format("[%s] (%d회)\n", label, count));
+                                org.json.JSONArray wordsArr = item.optJSONArray("words");
+                                if (wordsArr != null && wordsArr.length() > 0) {
+                                    sb.append("  단어: ");
+                                    for (int j = 0; j < wordsArr.length(); j++) {
+                                        sb.append(wordsArr.getString(j));
+                                        if (j < wordsArr.length() - 1) sb.append(", ");
+                                    }
+                                    sb.append("\n");
+                                }
+                            } catch (org.json.JSONException e) {
+                                e.printStackTrace();
+                            }
+                        }
+                        textTopWords.setText(sb.toString());
                     }
                 },
                 error -> {
                     error.printStackTrace();
-                    wordSummary.append(emotionName).append(": 오류 발생\n");
-                    completedCount[0]++;
-                    if (completedCount[0] == emotions.size()) {
-                        new AlertDialog.Builder(context)
-                            .setTitle("감정별 주요 키워드")
-                            .setMessage(wordSummary.toString())
-                            .setPositiveButton("확인", null)
-                            .show();
-                    }
+                    Log.e("TopWordsError", "에러 발생: " + error.toString());
                 }
-            );
-            queue.add(wordRequest);
-        }
+        );
+        queue.add(request);
     }
 
     private String getEmotionNameByColor(String color) {
-        switch (color) {
-            case "#FFFF00": return "기쁨";
-            case "#FFC0CB": return "행복";
-            case "#FFA500": return "뿌듯";
-            case "#0000FF": return "피곤";
-            case "#808080": return "우울";
-            case "#87CEEB": return "슬픔";
-            case "#FF1493": return "분노";
-            case "#800080": return "불안";
-            case "#008000": return "평온";
+        switch (color.toUpperCase()) {
+            case "#F4CE6F": return "기쁨";
+            case "#F3AAA8": return "행복";
+            case "#D68056": return "뿌듯";
+            case "#828BBF": return "피곤";
+            case "#C2C3C5": return "우울";
+            case "#8DB6EA": return "슬픔";
+            case "#D5595B": return "분노";
+            case "#976BB2": return "불안";
+            case "#6B9973": return "평온";
             default: return "기타";
         }
     }

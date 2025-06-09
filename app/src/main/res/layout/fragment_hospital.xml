@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -11,25 +12,45 @@
     <LinearLayout
         android:id="@+id/search_bar"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="56dp"
         android:orientation="horizontal"
-        android:padding="12dp"
-        android:background="#FFFFFF"
-        android:elevation="8dp"
-        android:layout_alignParentTop="true">
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp"
+        android:background="#ECEFEC"
+        android:gravity="center_vertical"
+        android:layout_alignParentTop="true"
+        android:layout_margin="12dp"
+        android:layout_marginBottom="8dp"
+        android:elevation="4dp"
+        android:layout_marginTop="12dp"
+        android:clipToPadding="false"
+        android:backgroundTint="@null"
+        android:layout_marginHorizontal="16dp"
+        android:backgroundTintMode="src_in">
+
+        <ImageButton
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:id="@+id/button_search"
+            android:src="@android:drawable/ic_menu_search"
+            app:tint="@android:color/black"
+            android:layout_marginEnd="8dp" />
 
         <EditText
             android:id="@+id/editText_location"
             android:layout_width="0dp"
+            android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:layout_height="wrap_content"
-            android:hint="Please enter your area name" />
+            android:text="mental care center"
+            android:textSize="16sp"
+            android:textColor="#000000" />
 
-        <Button
-            android:id="@+id/button_search"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Search" />
+        <ImageView
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:src="@android:drawable/ic_menu_edit"
+            app:tint="@android:color/black"
+            android:layout_marginStart="8dp" />
     </LinearLayout>
 
     <fragment

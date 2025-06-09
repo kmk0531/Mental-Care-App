@@ -136,7 +136,7 @@
                     android:id="@+id/img_tired"
                     android:layout_width="32dp"
                     android:layout_height="32dp"
-                    android:src="@drawable/character_depressed"
+                    android:src="@drawable/character_tired"
                     android:layout_marginStart="8dp" />
 
                 <EditText

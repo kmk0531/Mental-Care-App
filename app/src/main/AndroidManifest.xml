@@ -21,19 +21,24 @@
 
         <!-- 런처 액티비티 -->
         <activity
-            android:name=".LoginActivity"
+            android:name=".StartActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".LoginActivity"/>
+        <activity android:name=".SignUpActivity"/>
         <activity android:name=".SurveyActivity" />
         <activity android:name=".PagedGAD7Activity" />
         <activity android:name=".PagedPHQ9Activity" />
         <activity android:name=".PagedPSSActivity" />
         <activity android:name=".ResultActivity" />
         <activity android:name=".HistoryActivity" />
+        <activity android:name=".MeditationActivity"/>
+        <activity android:name=".StretchingActivity"/>
+        <activity android:name=".MyAccountActivity"/>
         <activity android:name=".MainActivity" />
         <!-- Google Maps API Key -->
         <meta-data

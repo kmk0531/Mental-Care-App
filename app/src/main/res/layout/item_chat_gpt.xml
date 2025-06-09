@@ -14,5 +14,6 @@
     android:textSize="16sp"
     android:padding="10dp"
     android:maxWidth="260dp"
+    android:background="@drawable/rounded_shape"
     android:text="GPT 응답 텍스트" />
 </LinearLayout>
